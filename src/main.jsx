@@ -6,6 +6,8 @@ import Home from "./Home";
 import Login from "./login";
 import Context from "./Context";
 import Signin from "./Signin";
+import Dashboard from "./Dashboard/Dashboard";
+import CreateTask from "./Dashboard/CreateTask";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -21,6 +23,16 @@ const router = createBrowserRouter([
      }
     ]
   },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children:[
+     {
+        path:'/dashboard/createtask',
+        element:<CreateTask></CreateTask>
+     },
+    ]
+  }
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
