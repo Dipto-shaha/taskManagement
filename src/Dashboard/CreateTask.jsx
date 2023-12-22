@@ -1,55 +1,94 @@
-import { useForm } from 'react-hook-form';
+import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { AuthContest } from "../Context";
+import { toast } from "react-toastify";
 
 const CreateTask = () => {
   const { register, handleSubmit, reset } = useForm();
+  const { user } = useContext(AuthContest);
 
   const handleFormSubmit = (data) => {
-    
-    console.log(data)
+    const taskInfo = { ...data, status: "todo", email: user.email };
+    console.log(data);
     // Reset the form after submission
+    fetch("http://localhost:5000/addtask", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(taskInfo),
+    })
+    .then((res) => res.json())
+    .then((res) =>{
+      console.log(res);
+      toast.success("Task Added Successfully");
+    });
     reset();
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)} className="max-w-md mx-auto my-8">
+    <form
+      onSubmit={handleSubmit(handleFormSubmit)}
+      className="max-w-md mx-auto my-8"
+    >
       <div className="mb-4">
-        <label htmlFor="title" className="block text-sm font-semibold text-gray-600">Title</label>
+        <label
+          htmlFor="title"
+          className="block text-sm font-semibold text-gray-600"
+        >
+          Title
+        </label>
         <input
           type="text"
           id="title"
           name="title"
-          {...register('title', { required: 'Title is required' })}
+          {...register("title", { required: "Title is required" })}
           className="w-full p-2 border rounded-md"
         />
       </div>
 
       <div className="mb-4">
-        <label htmlFor="description" className="block text-sm font-semibold text-gray-600">Description</label>
+        <label
+          htmlFor="description"
+          className="block text-sm font-semibold text-gray-600"
+        >
+          Description
+        </label>
         <textarea
           id="description"
           name="description"
-          {...register('description')}
+          {...register("description")}
           className="w-full p-2 border rounded-md"
         />
       </div>
 
       <div className="mb-4">
-        <label htmlFor="deadline" className="block text-sm font-semibold text-gray-600">Deadline</label>
+        <label
+          htmlFor="deadline"
+          className="block text-sm font-semibold text-gray-600"
+        >
+          Deadline
+        </label>
         <input
           type="date"
           id="deadline"
           name="deadline"
-          {...register('deadline')}
+          {...register("deadline")}
           className="w-full p-2 border rounded-md"
         />
       </div>
 
       <div className="mb-4">
-        <label htmlFor="priority" className="block text-sm font-semibold text-gray-600">Priority</label>
+        <label
+          htmlFor="priority"
+          className="block text-sm font-semibold text-gray-600"
+        >
+          Priority
+        </label>
         <select
           id="priority"
           name="priority"
-          {...register('priority')}
+          {...register("priority")}
           className="w-full p-2 border rounded-md"
         >
           <option value="low">Low</option>
@@ -58,7 +97,9 @@ const CreateTask = () => {
         </select>
       </div>
 
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">Create Task</button>
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+        Create Task
+      </button>
     </form>
   );
 };

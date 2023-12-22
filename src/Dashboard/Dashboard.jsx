@@ -1,11 +1,24 @@
 import { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContest } from "../Context";
+import { ToastContainer } from "react-toastify";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContest);
   return (
     <div className="flex">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="w-1/6">
         <span className="flex justify-center items-center border-2 p-1 rounded-xl mr-2  border-[#7ec6d5] ">
           <img
