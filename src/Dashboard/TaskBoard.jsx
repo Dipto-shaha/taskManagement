@@ -3,17 +3,19 @@ import { DragDropContext } from "react-beautiful-dnd";
 import TaskList from "./TaskList";
 import { AuthContest } from "../Context";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const TaskBoard = () => {
   const { user } = useContext(AuthContest);
   const [tasks, setTasks] = useState([]);
   useEffect(() => {
-  
     axios
-      .get(`http://localhost:5000/tasklist?email=${user.email}`)
+      .get(
+        `https://to-do-list-server-brown.vercel.app/tasklist?email=${user.email}`
+      )
       .then((response) => {
         setTasks(response.data);
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
@@ -27,7 +29,7 @@ const TaskBoard = () => {
     const taskId = result.draggableId;
     const destinationListId = result.destination.droppableId;
     axios
-      .put(`http://localhost:5000/updateStatus`, {
+      .put(`https://to-do-list-server-brown.vercel.app/updateStatus`, {
         id: taskId,
         status: destinationListId,
       })
@@ -46,21 +48,36 @@ const TaskBoard = () => {
     });
     setTasks(updatedTasks);
   };
-
+  const handletaskDelete = (id) => {
+    axios
+      .delete(`https://to-do-list-server-brown.vercel.app/taskdelete/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        toast.success("Task Delted Successfully");
+        const updatedTasks = tasks.filter((task) => task._id != id);
+        setTasks(updatedTasks);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+  };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="grid grid-cols-3 mt-8 gap-10">
         <TaskList
           title="ToDo"
           tasks={tasks.filter((task) => task.status === "todo")}
+          handletaskDelete={handletaskDelete}
         />
         <TaskList
           title="Ongoing"
           tasks={tasks.filter((task) => task.status === "ongoing")}
+          handletaskDelete={handletaskDelete}
         />
         <TaskList
           title="Completed"
           tasks={tasks.filter((task) => task.status === "completed")}
+          handletaskDelete={handletaskDelete}
         />
       </div>
     </DragDropContext>

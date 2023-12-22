@@ -11,25 +11,25 @@ const CreateTask = () => {
     const taskInfo = { ...data, status: "todo", email: user.email };
     console.log(data);
     // Reset the form after submission
-    fetch("http://localhost:5000/addtask", {
+    fetch("https://to-do-list-server-brown.vercel.app/addtask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(taskInfo),
     })
-    .then((res) => res.json())
-    .then((res) =>{
-      console.log(res);
-      toast.success("Task Added Successfully");
-    });
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        toast.success("Task Added Successfully");
+      });
     reset();
   };
 
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}
-      className="max-w-md mx-auto my-8"
+      className="max-w-md mx-auto my-8 border-2 p-5 rounded-lg border-[#7ec6d5]"
     >
       <div className="mb-4">
         <label
@@ -97,7 +97,7 @@ const CreateTask = () => {
         </select>
       </div>
 
-      <button type="submit" className="bg-blue-500 text-white p-2 rounded-md">
+      <button type="submit" className="bg-[#ff715b] text-white px-5 py-2 items-center rounded-md">
         Create Task
       </button>
     </form>

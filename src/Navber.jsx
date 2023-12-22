@@ -52,7 +52,7 @@ const Navber = () => {
               </li>
               {user && (
                 <li>
-                  <NavLink to="/dashboard">Dashboard</NavLink>
+                  <NavLink to="/dashboard/tasklist">Dashboard</NavLink>
                 </li>
               )}
             </ul>
@@ -78,7 +78,7 @@ const Navber = () => {
             </li>
             {user && (
               <li>
-                <NavLink to="/dashboard">Dashboard</NavLink>
+                <NavLink to="/dashboard/tasklist">Dashboard</NavLink>
               </li>
             )}
           </ul>

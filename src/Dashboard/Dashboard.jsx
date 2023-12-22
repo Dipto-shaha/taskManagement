@@ -6,6 +6,10 @@ import { ToastContainer } from "react-toastify";
 const Dashboard = () => {
   const { user } = useContext(AuthContest);
   return (
+    <>
+    <p className="mx-2 my-5 md:text-5xl  text-center text-xl font-bold">
+        Easy<span className="text-[#ff715b]">Plan</span>
+      </p>
     <div className="flex">
       <ToastContainer
         position="bottom-center"
@@ -19,6 +23,7 @@ const Dashboard = () => {
         pauseOnHover
         theme="dark"
       />
+      
       <div className="w-1/6">
         <span className="flex justify-center items-center border-2 p-1 rounded-xl mr-2  border-[#7ec6d5] ">
           <img
@@ -28,7 +33,7 @@ const Dashboard = () => {
           />
           <p className="mr-2">{user.displayName ? user.displayName : "Name"}</p>
         </span>
-        <ul>
+        <ul className="space-y-5 mx-20 mt-5">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
@@ -43,7 +48,7 @@ const Dashboard = () => {
       <div className="w-5/6">
         <Outlet></Outlet>
       </div>
-    </div>
+    </div></>
   );
 };
 

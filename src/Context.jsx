@@ -47,7 +47,10 @@ const Context = ({ children }) => {
       if (currentUser) {
         console.log("User is present");
         axios
-          .post("http://localhost:5000/adduser",{ email:currentUser.email,name:currentUser.displayName})
+          .post("https://to-do-list-server-brown.vercel.app/adduser", {
+            email: currentUser.email,
+            name: currentUser.displayName,
+          })
           .then((res) => console.log(res.data))
           .catch((err) => {
             console.error(err);

@@ -2,7 +2,7 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const TaskList = ({ title, tasks }) => {
+const TaskList = ({ title, tasks,handletaskDelete }) => {
   return (
     <Droppable droppableId={title.toLowerCase()} type="task">
       {(provided) => (
@@ -23,9 +23,9 @@ const TaskList = ({ title, tasks }) => {
                 >
                   <p className="font-semibold">{task.title}</p>
                   <p className="text-gray-600">{task.description}</p>
-                  <div>
-                    <Link to={`/dashboard/update/${task._id}`}><button className='btn'> Update</button></Link>
-                    <button className='btn'> Delete</button>
+                  <div className='flex justify-between my-5'>
+                    <Link to={`/dashboard/update/${task._id}`}><button className='btn bg-[#00cf5d] text-[#FFF]'> Update</button></Link>
+                    <button className='btn bg-[#ff715b] text-[#FFF]' onClick={()=>handletaskDelete(task._id)}> Delete</button>
                   </div>
                 </div>
               )}
@@ -52,5 +52,6 @@ TaskList.propTypes = {
         status: PropTypes.string.isRequired,
       })
     ).isRequired,
+    handletaskDelete:PropTypes.func.isRequired
   };
 export default TaskList;

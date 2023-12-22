@@ -8,11 +8,11 @@ import axios from "axios";
 const TaskUpdate = () => {
   const { register, handleSubmit, setValue } = useForm();
   const { user } = useContext(AuthContest);
-  const [status,setStatus]=useState("");
-  const {id} =useParams();
+  const [status, setStatus] = useState("");
+  const { id } = useParams();
   useEffect(() => {
     //console.log(id)
-    fetch(`http://localhost:5000/gettask/${id}`)
+    fetch(`https://to-do-list-server-brown.vercel.app/gettask/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setValue("title", data.title);
@@ -27,9 +27,12 @@ const TaskUpdate = () => {
   }, [id, setValue]);
 
   const handleFormSubmit = (data) => {
-    const updatedTaskInfo = { ...data, email: user.email,status: status };
-    console.log(updatedTaskInfo)
-    axios.put(`http://localhost:5000/updatetask/${id}`, { info:updatedTaskInfo})
+    const updatedTaskInfo = { ...data, email: user.email, status: status };
+    console.log(updatedTaskInfo);
+    axios
+      .put(`https://to-do-list-server-brown.vercel.app/updatetask/${id}`, {
+        info: updatedTaskInfo,
+      })
       .then((res) => {
         console.log(res);
         toast.success("Task Updated Successfully");
@@ -117,6 +120,5 @@ const TaskUpdate = () => {
     </form>
   );
 };
-
 
 export default TaskUpdate;
