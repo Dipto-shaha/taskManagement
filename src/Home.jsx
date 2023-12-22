@@ -11,7 +11,6 @@ const Home = () => {
                 <Outlet></Outlet>
                 <UserShow></UserShow>
             </div>
-            
             <Footer ></Footer>
         </div>
     );

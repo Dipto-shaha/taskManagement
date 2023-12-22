@@ -1,5 +1,6 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const TaskList = ({ title, tasks }) => {
   return (
@@ -22,6 +23,10 @@ const TaskList = ({ title, tasks }) => {
                 >
                   <p className="font-semibold">{task.title}</p>
                   <p className="text-gray-600">{task.description}</p>
+                  <div>
+                    <Link to={`/dashboard/update/${task._id}`}><button className='btn'> Update</button></Link>
+                    <button className='btn'> Delete</button>
+                  </div>
                 </div>
               )}
             </Draggable>

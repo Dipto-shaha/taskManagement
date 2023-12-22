@@ -13,6 +13,7 @@ import Banner from "./Banner";
 import ErrorPage from "./ErrorPage";
 import Contact from "./Contact";
 import About from "./About";
+import TaskUpdate from "./Dashboard/TaskUpdate";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
         path: "/dashboard/tasklist",
         element: <PrivateRoute><TaskBoard></TaskBoard></PrivateRoute>,
       },
+      {
+        path:'/dashboard/update/:id',
+        element:<PrivateRoute><TaskUpdate></TaskUpdate></PrivateRoute>
+      }
     ],
   },
 ]);
