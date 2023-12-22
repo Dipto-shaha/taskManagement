@@ -47,22 +47,12 @@ const Context = ({ children }) => {
       if (currentUser) {
         console.log("User is present");
         axios
-          .post("https://skillhub-server.vercel.app/jwt", currentUser, {
-            withCredentials: true,
-          })
+          .post("http://localhost:5000/adduser",{ email:currentUser.email,name:currentUser.displayName})
           .then((res) => console.log(res.data))
           .catch((err) => {
             console.error(err);
-            logOut();
+            //logOut();
           });
-      } else {
-        console.log("User is not present");
-        axios
-          .post("https://skillhub-server.vercel.app/logout", user, {
-            withCredentials: true,
-          })
-          .then((res) => console.log(res.data))
-          .catch((error) => console.log(error));
       }
       setLoading(false);
     });
