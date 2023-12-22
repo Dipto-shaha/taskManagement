@@ -11,6 +11,8 @@ import TaskBoard from "./Dashboard/TaskBoard";
 import PrivateRoute from "./PrivateRoute";
 import Banner from "./Banner";
 import ErrorPage from "./ErrorPage";
+import Contact from "./Contact";
+import About from "./About";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
         path: "/signin",
         element: <Signin></Signin>,
       },
+      {
+        path:'/contact',
+        element: <Contact></Contact>,
+      },
+      {
+        path:'/about',
+        element:<About></About>
+      }
     ],
   },
   {
