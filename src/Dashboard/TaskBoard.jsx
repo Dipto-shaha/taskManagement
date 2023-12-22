@@ -1,43 +1,24 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DragDropContext } from "react-beautiful-dnd";
 import TaskList from "./TaskList";
+import { AuthContest } from "../Context";
+import axios from "axios";
 
 const TaskBoard = () => {
-  const [tasks, setTasks] = useState([
-    {
-      id: "1",
-      title: "Create React Task Management App",
-      description: "Build a task management platform using React",
-      deadline: "2023-01-31",
-      priority: "high",
-      status: "todo",
-    },
-    {
-      id: "2",
-      title: "Implement Drag-and-Drop",
-      description: "Add drag-and-drop functionality for task lists",
-      deadline: "2023-02-15",
-      priority: "moderate",
-      status: "ongoing",
-    },
-    {
-      id: "3",
-      title: "Add Authentication",
-      description: "Implement user authentication and authorization",
-      deadline: "2023-03-01",
-      priority: "high",
-      status: "completed",
-    },
-    {
-      id: "4",
-      title: "Add Autfnfjsbfhentication",
-      description: "Implement user authentication and authorization",
-      deadline: "2023-03-01",
-      priority: "high",
-      status: "completed",
-    },
-  ]);
-
+  const { user } = useContext(AuthContest);
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+  
+    axios
+      .get(`http://localhost:5000/tasklist?email=${user.email}`)
+      .then((response) => {
+        setTasks(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+  }, [user, setTasks]);
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -45,9 +26,20 @@ const TaskBoard = () => {
 
     const taskId = result.draggableId;
     const destinationListId = result.destination.droppableId;
-
+    axios
+      .put(`http://localhost:5000/updateStatus`, {
+        id: taskId,
+        status: destinationListId,
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching tasks:", error);
+      });
+    console.log(taskId, destinationListId);
     const updatedTasks = tasks.map((task) => {
-      if (task.id === taskId) {
+      if (task._id === taskId) {
         return { ...task, status: destinationListId };
       }
       return task;

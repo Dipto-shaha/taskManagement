@@ -12,7 +12,7 @@ const TaskList = ({ title, tasks }) => {
         >
           <h3 className="text-lg font-semibold mb-4">{title}</h3>
           {tasks.map((task, index) => (
-            <Draggable key={task.id} draggableId={task.id} index={index}>
+            <Draggable key={task._id} draggableId={task._id} index={index}>
               {(provided) => (
                 <div
                   {...provided.draggableProps}

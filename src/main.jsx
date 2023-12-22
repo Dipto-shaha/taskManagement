@@ -9,11 +9,16 @@ import Dashboard from "./Dashboard/Dashboard";
 import CreateTask from "./Dashboard/CreateTask";
 import TaskBoard from "./Dashboard/TaskBoard";
 import PrivateRoute from "./PrivateRoute";
+import Banner from "./Banner";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
     children: [
+      {
+         path: "/",
+         element: <Banner></Banner>,
+      },
       {
         path: "/login",
         element: <Login></Login>,

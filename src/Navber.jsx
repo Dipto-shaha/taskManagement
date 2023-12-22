@@ -62,7 +62,7 @@ const Navber = () => {
             src="https://i.ibb.co/WpgYsv0/logo.jpg"
           ></img>
           <p className="mx-2 md:text-4xl font-bold">
-            Skill<span className="text-[#ff715b]">Hub</span>
+          Easy<span className="text-[#ff715b]">Plan</span>
           </p>
         </div>
         <div className="navbar-center hidden lg:flex">
