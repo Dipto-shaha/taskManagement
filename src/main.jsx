@@ -10,10 +10,12 @@ import CreateTask from "./Dashboard/CreateTask";
 import TaskBoard from "./Dashboard/TaskBoard";
 import PrivateRoute from "./PrivateRoute";
 import Banner from "./Banner";
+import ErrorPage from "./ErrorPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
          path: "/",
